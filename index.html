@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tặng Em - 8/3</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #ffeef8 0%, #ffe0f0 50%, #ffd1e8 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .container {
+            text-align: center;
+            z-index: 10;
+            position: relative;
+        }
+
+        .gift-button {
+            background: linear-gradient(45deg, #ff6b9d, #ff8fab);
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 10px 30px rgba(255, 107, 157, 0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        .gift-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(255, 107, 157, 0.4);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        .message {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(255, 107, 157, 0.3);
+            z-index: 100;
+            max-width: 500px;
+            backdrop-filter: blur(10px);
+        }
+
+        .message h2 {
+            color: #ff6b9d;
+            font-size: 32px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 107, 157, 0.2);
+        }
+
+        .message p {
+            color: #d63384;
+            font-size: 18px;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .heart {
+            position: absolute;
+            color: #ff6b9d;
+            font-size: 20px;
+            animation: float 3s ease-in-out infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes float {
+            0% {
+                opacity: 0;
+                transform: translateY(100vh) rotate(0deg);
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-100vh) rotate(360deg);
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ff8fab;
+            border-radius: 50%;
+            animation: sparkle 2s linear infinite;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        @keyframes sparkle {
+            0% {
+                opacity: 0;
+                transform: scale(0);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: scale(0);
+            }
+        }
+
+        .title {
+            color: #d63384;
+            font-size: 24px;
+            margin-bottom: 30px;
+            text-shadow: 2px 2px 4px rgba(214, 51, 132, 0.2);
+        }
+
+        .close-btn {
+            background: #ff6b9d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .close-btn:hover {
+            background: #ff8fab;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">🌸 Gửi người thương của anh 🌸</h1>
+        <button class="gift-button" onclick="showLove()">Bấm vào đây để nhận quà 💝</button>
+    </div>
+
+    <div class="message" id="loveMessage">
+        <h2>💕 Gửi Em Người Yêu Anh 💕</h2>
+        <p>Nhân ngày 8/3, anh muốn gửi đến em những lời yêu thương chân thành nhất.</p>
+        <p>Em là ánh nắng ấm áp nhất trong cuộc đời anh, là nụ cười làm anh say đắm mỗi ngày.</p>
+        <p>Cảm ơn em đã đến bên anh, cùng anh chia sẻ mọi khoảnh khắc vui buồn.</p>
+        <p>Anh yêu em hơn mọi lời có thể diễn tả. Chúc em một ngày 8/3 thật hạnh phúc và luôn xinh đẹp!</p>
+        <p>💖 Yêu em rất nhiều! 💖</p>
+        <button class="close-btn" onclick="hideMessage()">💝 Đóng lại</button>
+    </div>
+
+    <script>
+        function showLove() {
+            // Hiện lời chúc
+            document.getElementById('loveMessage').style.display = 'block';
+            
+            // Tạo hiệu ứng tim bay
+            createHearts();
+            createSparkles();
+            
+            // Ẩn nút
+            document.querySelector('.gift-button').style.display = 'none';
+            document.querySelector('.title').style.display = 'none';
+        }
+
+        function hideMessage() {
+            document.getElementById('loveMessage').style.display = 'none';
+            document.querySelector('.gift-button').style.display = 'block';
+            document.querySelector('.title').style.display = 'block';
+            
+            // Dọn dẹp hiệu ứng
+            setTimeout(() => {
+                document.querySelectorAll('.heart, .sparkle').forEach(el => el.remove());
+            }, 1000);
+        }
+
+        function createHearts() {
+            const heartSymbols = ['❤️', '💕', '💖', '💗', '💝', '💓', '💞', '💘'];
+            
+            for (let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.animationDuration = (Math.random() * 3 + 2) + 's';
+                    heart.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                    heart.style.animationDelay = Math.random() * 2 + 's';
+                    document.body.appendChild(heart);
+                    
+                    // Xóa tim sau khi animation kết thúc
+                    setTimeout(() => heart.remove(), 5000);
+                }, i * 100);
+            }
+        }
+
+        function createSparkles() {
+            for (let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = Math.random() * 100 + '%';
+                    sparkle.style.top = Math.random() * 100 + '%';
+                    sparkle.style.animationDelay = Math.random() * 2 + 's';
+                    sparkle.style.background = `hsl(${Math.random() * 60 + 330}, 70%, 60%)`;
+                    document.body.appendChild(sparkle);
+                    
+                    // Xóa sao sau khi animation kết thúc
+                    setTimeout(() => sparkle.remove(), 2000);
+                }, i * 150);
+            }
+        }
+
+        // Tạo hiệu ứng nền tinh tế
+        function createBackgroundHearts() {
+            setInterval(() => {
+                if (document.getElementById('loveMessage').style.display === 'block') {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = '💕';
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.fontSize = '10px';
+                    heart.style.opacity = '0.3';
+                    heart.style.animationDuration = '4s';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => heart.remove(), 4000);
+                }
+            }, 2000);
+        }
+
+        createBackgroundHearts();
+    </script>
+</body>
+</html>
